@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 1</title>
+</head>
+
+<body>
+    <div class="level0">
+        <div class="level1">
+            <div class="level2">
+                <div class="level3"></div>
+            </div>
+            <div class="level2">
+                <div class="level3"></div>
+            </div>
+        </div>
+        <div class="level1">
+            <div class="level2">
+                <div class="level3"></div>
+            </div>
+            <div class="level2">
+                <div class="level3"></div>
+            </div>
+        </div>
+        <div class="level1">
+            <div class="level2">
+                <div class="level3 kuku"></div>
+            </div>
+            <div class="level2">
+                <div class="level3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Дан массив const arr = [1, 5, 7, 9] с помощью Math.min и spread оператора, найти минимальное число в массиве, решение задание должно состоять из одной строки
+        const arr = [1, 5, 7, 9];
+        console.log(Math.min(...arr));
+
+        // 2. Напишите функцию createCounter, которая создает счетчик и возвращает объект с двумя методами: increment и decrement. Метод increment должен увеличивать значение счетчика на 1, а метод decrement должен уменьшать значение счетчика на 1. Значение счетчика должно быть доступно только через методы объекта, а не напрямую.
+        function createCounter(value) {
+            return {
+                increment: function () {
+                    value++;
+                    return this;
+                },
+                decrement: function () {
+                    value--;
+                    return this;
+                },
+                get: function () {
+                    console.log(`Текущее значение счетчика: ${value}`);
+                    return this;
+                }
+            };
+        }
+        let counter = createCounter(10);
+        counter.get().increment().get().decrement().get();
+
+        //3. Напишите рекурсивную функцию findElementByClass, которая принимает корневой элемент дерева DOM и название класса в качестве аргументов и возвращает первый найденный элемент с указанным классом в этом дереве.
+        // const rootElement = document.querySelectorAll('.level0');
+        function findElementByClass(rootEl, className) {
+            if (rootEl.classList.contains(className)) {
+                return rootEl;
+            }
+            for (const child of rootEl.children) {
+                const foundEl = findElementByClass(child, className);
+                if (foundEl) {
+                    return foundEl;
+                }
+            }
+            return null;
+        }
+
+        const rootEl = document.querySelector('.level0');
+        const targetEl = findElementByClass(rootEl, 'kuku');
+        console.log(targetEl);
+    </script>
+</body>
+
+</html>
