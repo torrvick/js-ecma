@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 2. Студенты</title>
+</head>
+
+<body>
+    <script>
+        class Student {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+                this.grade = null;
+            }
+            displayInfo() {
+                console.log(`\t${this.name}, Возраст: ${this.age}, Класс: ${this.grade || 'Не установлен'}`);
+            }
+            setGrade(grade) {
+                this.grade = grade;
+            }
+        }
+
+        class Grade {
+            constructor(name) {
+                this.name = name;
+                this.students = [];
+            }
+            displayStudents() {
+                console.log(`Список учеников класса ${this.name}:`);
+                if (this.students.length === 0) console.log('\tКласс пуст');
+                this.students.forEach(student => {
+                    student.displayInfo();
+                });
+            }
+            acceptStudents(...students) {
+                students.forEach(student => {
+                    this.students.push(student);
+                    student.setGrade(this.name);
+                });
+            }
+            displayInfo() {
+                console.log(`\tКласс ${this.name}`);
+            }
+        }
+
+        class School {
+            constructor(name) {
+                this.name = name;
+                this.grades = [];
+            }
+            addGrades(...newGrades) {
+                newGrades.forEach(newGrade => {
+                    this.grades.push(newGrade);
+                });
+            }
+            showAllGrades() {
+                console.log(`${this.name}. Список классов:`);
+                this.grades.forEach(grade => {
+                    grade.displayInfo();
+                });
+            }
+            showAllStudents() {
+                console.log(`${this.name}. Список всех учеников школы:`);
+                this.grades.forEach(grade => {
+                    grade.displayStudents();
+                });
+            }
+        }
+        const ivan = new Student('Иван', 8);
+        const petr = new Student('Петр', 9);
+        const masha = new Student('Маша', 7);
+        const serg = new Student('Сергей', 6);
+        const marina = new Student('Марина', 7);
+        const vasya = new Student('Вася', 8);
+        const oleg = new Student('Олег', 9);
+
+        const grade3A = new Grade('3А');
+        const grade3B = new Grade('3Б');
+        const grade3C = new Grade('3В');
+
+        const superSchool = new School('Супер-школа');
+
+        superSchool.addGrades(grade3A, grade3B, grade3C);
+
+        grade3A.acceptStudents(ivan, petr, masha);
+        grade3B.acceptStudents(serg, marina);
+        grade3C.acceptStudents(vasya, oleg);
+
+        superSchool.showAllStudents();
+
+
+    </script>
+</body>
+
+</html>

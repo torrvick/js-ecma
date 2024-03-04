@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 2. Книги</title>
+</head>
+
+<body>
+    <script>
+        class Book {
+            constructor(name, author = '', pages = null) {
+                this.name = name;
+                this.author = author;
+                this.pages = pages;
+            }
+            setAuthor(author) {
+                this.author = author;
+                return this;
+            }
+            setPages(pages) {
+                this.pages = pages;
+                return this;
+            }
+            displayInfo() {
+                console.log(`Название: ${this.name}`);
+                console.log(`Автор: ${this.author || 'Неизвестен'}`);
+                console.log(`Количество страниц: ${this.pages || 'Неизвестно'}`);
+                return this;
+            }
+        }
+        const book1 = new Book('Война и мир');
+        book1.displayInfo();
+        book1.setAuthor("Л. Н. Толстой").setPages(1300).displayInfo();
+    </script>
+</body>
+
+</html>
