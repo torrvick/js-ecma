@@ -11,10 +11,9 @@
     <script>
         class Order {
             #orderNumber;
-            #products;
+            #products = [];
             constructor(orderNumber) {
                 this.#orderNumber = orderNumber;
-                this.#products = [];
             }
 
             addProduct(product) {
