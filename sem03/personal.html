@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 3. Персонал</title>
+</head>
+
+<body>
+    <script>
+        class Employee {
+            constructor(name) {
+                this.name = name;
+            }
+            displayInfo() {
+                console.log(`Name: ${this.name}`);
+            }
+        }
+
+        class Manager extends Employee {
+            constructor(name, department) {
+                super(name);
+                this.department = department;
+            }
+            displayInfo() {
+                console.log(`Name: ${this.name}\nDepartment: ${this.department}`);
+            }
+        }
+
+        const employee = new Employee("John Smith");
+        employee.displayInfo();
+
+        const manager = new Manager("Jane Doe", "Sales");
+        manager.displayInfo();
+    </script>
+</body>
+
+</html>

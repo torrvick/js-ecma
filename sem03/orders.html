@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 3. Заказы</title>
+</head>
+
+<body>
+    <script>
+        class Order {
+            #orderNumber;
+            #products;
+            constructor(orderNumber) {
+                this.#orderNumber = orderNumber;
+                this.#products = [];
+            }
+
+            addProduct(product) {
+                if (!(product instanceof Product)) {
+                    throw new Error('Некорректный тип добавляемого продукта');
+                }
+                this.#products.push(product);
+            }
+
+            getAllProducts() {
+                console.log(`Состав заказа ${this.#orderNumber}:`);
+                this.#products.forEach((product) => {
+                    console.log(`${product.getName().padEnd(10, ' ')}\t\t${product.getPrice()}`);
+                });
+                console.log('Итого:'.padEnd(15, ' '), this.getTotalPrice());
+            }
+
+            getTotalPrice() {
+                return this.#products.reduce((totalPrice, el) => totalPrice + el.getPrice(), 0);
+            }
+        }
+
+        class Product {
+            #name;
+            #price;
+            constructor(name, price) {
+                if (price < 0 || !isFinite(price)) {
+                    throw new Error('Введите корректную цену товара');
+                }
+                this.#name = name;
+                this.#price = price;
+            }
+            getName() {
+                return this.#name;
+            }
+            getPrice() {
+                return this.#price;
+            }
+        }
+
+        const order = new Order(12345);
+
+        const product1 = new Product('Phone', 500);
+        order.addProduct(product1);
+
+        const product2 = new Product('Headphones', 100);
+        order.addProduct(product2);
+        // const product3 = new Product('Tablet', 'Сто рублей')
+        // order.addProduct([0, 0, 0, 0])
+        order.getAllProducts();
+
+        console.log(order.getTotalPrice()); // Вывод: 600
+    </script>
+</body>
+
+</html>
