@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семинар 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h3 class="task-title">Задание 1. Получение данных о пользователе</h3>
+    <div class="usersbox">
+        <div class="usersbox__params">
+            <p>Введите ID пользователя:</p>
+            <input class="usersbox__userid" type="number" min=1 max=10 placeholder="ID">
+
+        </div>
+        <div class="usersbox__info">
+        </div>
+    </div>
+    <h3 class="task-title">Задание 2. Отправка данных на сервер</h3>
+    <form class="adduser">
+        <input type="text" id="username" class="adduser__input" placeholder="Введите имя">
+        <input type="text" id="userage" class="adduser__input" placeholder="Введите возраст">
+        <input type="email" id="useremail" class="adduser__input" placeholder="Введите email">
+        <input type="submit" class="adduser__btn" value="Добавить">
+        <p class="adduser__status"></p>
+    </form>
+    <h3 class="task-title">Задание 3. Изменение стиля элемента через заданное время</h3>
+    <button id="myElement">Нажми меня</button>
+    <script src="users.js"></script>
+</body>
+
+</html>
