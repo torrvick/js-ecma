@@ -1,19 +1,8 @@
 const urlAPI = 'https://jsonplaceholder.typicode.com/users/';
-
+// Задание 1
 const idInputEl = document.querySelector('.usersbox__userid');
 idInputEl.addEventListener('input', (e) => {
 	if (idInputEl.value) getUserData(idInputEl.value);
-});
-
-const addUserEl = document.querySelector('.adduser');
-addUserEl.addEventListener('submit', (e) => {
-	e.preventDefault();
-	const newUser = {
-		name: username.value,
-		age: userage.value,
-		email: useremail.value,
-	};
-	saveUserData(newUser);
 });
 
 function getUserData(userid) {
@@ -25,34 +14,35 @@ function getUserData(userid) {
 			return response.json();
 		})
 		.then((user) => {
-			renderUser(user);
+			console.log(JSON.stringify(user, null, 2));
+			const userInfoEl = document.querySelector('.usersbox__info');
+			userInfoEl.innerHTML = `
+			<h4>${user.name}</h4>
+			<p>${user.username}</p>
+			<p>${user.email}</p>
+			<p>${Object.keys(user.address)
+				.filter((key) => key !== 'geo')
+				.map((key) => user.address[key])
+				.join(', ')}</p>	
+			<p>${user.phone}</p>
+			<p>${user.website}</p>
+		`;
 		})
 		.catch((error) => {
 			console.error('Ошибка:', error.message);
 		});
 }
 
-function renderUser(user) {
-	const userInfoEl = document.querySelector('.usersbox__info');
-	userInfoEl.innerHTML = `
-		<h4>${user.name}</h4>
-		<p>${user.username}</p>
-		<p>${user.email}</p>
-		<p>${Object.keys(user.address)
-			.filter((key) => key !== 'geo')
-			.map((key) => user.address[key])
-			.join(', ')}</p>	
-		<p>${user.phone}</p>
-		<p>${user.website}</p>
-	`;
-}
+// Задание 2
+const addUserForm = document.querySelector('.adduser');
 
-function saveUserData(user) {
+addUserForm.addEventListener('submit', (e) => {
+	e.preventDefault();
 	fetch(`${urlAPI}`, {
 		method: 'POST',
-		body: JSON.stringify(user),
+		body: new FormData(addUserForm),
 		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
+			'Content-type': 'application; charset=UTF-8',
 		},
 	})
 		.then((response) => {
@@ -68,8 +58,9 @@ function saveUserData(user) {
 		.catch((error) => {
 			console.error('Ошибка:', error.message);
 		});
-}
+});
 
+// Задание 3
 const myEl = document.querySelector('#myElement');
 
 myEl.addEventListener('click', () => {
