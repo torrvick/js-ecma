@@ -41,9 +41,6 @@ addUserForm.addEventListener('submit', (e) => {
 	fetch(`${urlAPI}`, {
 		method: 'POST',
 		body: new FormData(addUserForm),
-		headers: {
-			'Content-type': 'application; charset=UTF-8',
-		},
 	})
 		.then((response) => {
 			if (!response.ok) {
@@ -51,9 +48,9 @@ addUserForm.addEventListener('submit', (e) => {
 			}
 			return response.json();
 		})
-		.then((json) => {
-			console.log(`Пользователь с ID=${json.id} успешно добавлен`);
-			document.querySelector('.adduser__status').textContent = `Пользователь с ID=${json.id} успешно добавлен`;
+		.then((addedUser) => {
+			console.log(`Пользователь с ID=${addedUser.id} успешно добавлен`);
+			document.querySelector('.adduser__status').textContent = `Пользователь с ID=${addedUser.id} успешно добавлен`;
 		})
 		.catch((error) => {
 			console.error('Ошибка:', error.message);
